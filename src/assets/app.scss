@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap');
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  background: rgba(0, 188, 242, 0.3);
+}
+
+.splash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  &__title {
+    font-size: 10rem;
+  }
+  &__logo {
+    font-size: 12rem;
+    line-height: 12rem;
+    overflow: hidden;
+  }
+  &__btn {
+    margin: 1rem;
+  }
+}
+
+.btn {
+  background: rgb(0, 188, 242);
+  margin: 0.2rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 0.3rem;
+  font-size: inherit;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background: rgba(0, 188, 242, 0.5);
+  }
+  &:disabled {
+    background: #ccc;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.bf-grid {
+  margin: 2vmin;
+  display: grid;
+  background: rgb(91, 202, 251);
+  grid-template-rows: repeat(10, 4.6vmin);
+  grid-template-columns: repeat(10, 4.6vmin);
+  &_enemy > .taken {
+    background-color: inherit !important;
+    border-radius: 0 !important;
+  }
+  div {
+    border: 0.1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+.grid-ships {
+  display: flex;
+}
+
+.ship {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1vmin;
+  width: calc(4.6vmin * var(--width, 1));
+  height: calc(4.6vmin * var(--height, 1));
+  border-radius: 2.3vmin;
+  > div {
+    width: 4.6vmin;
+    height: 4.6vmin;
+  }
+}
+
+.info {
+  font-size: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  &__msg {
+    margin: 0.4rem;
+  }
+}
+
+.taken,
+.ship {
+  background-color: rgb(204, 204, 204);
+  position: relative;
+}
+
+.taken {
+  &.horizontal::before,
+  &.vertical::before {
+    content: '';
+    position: absolute;
+    border: 0.3vmin solid #fff;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
+  }
+  &.horizontal {
+    &::before {
+      border-left: 0;
+      border-right: 0;
+      animation: ripplesY 5s linear infinite;
+    }
+    &.start,
+    &.start::before {
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+    }
+    &.end,
+    &.end::before {
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+  }
+  &.vertical {
+    &::before {
+      border-top: 0;
+      border-bottom: 0;
+      animation: ripplesX 5s linear infinite;
+    }
+    &.start,
+    &.start::before {
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+    }
+    &.end,
+    &.end::before {
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+  }
+}
+
+@keyframes ripplesX {
+  0% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1.3);
+  }
+}
+
+@keyframes ripplesY {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(1.3);
+  }
+}
+
+.destroyer-container {
+  --width: 2;
+  &_vertical {
+    --height: 2;
+    --width: 1;
+  }
+}
+
+.submarine-container,
+.cruiser-container {
+  --width: 3;
+  &_vertical {
+    --height: 3;
+    --width: 1;
+  }
+}
+
+.battleship-container {
+  --width: 4;
+  &_vertical {
+    --height: 4;
+    --width: 1;
+  }
+}
+
+.carrier-container {
+  --width: 5;
+  &_vertical {
+    --height: 5;
+    --width: 1;
+  }
+}
+
+.bang,
+.miss {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: 2vmin;
+    height: 2vmin;
+  }
+}
+
+.bang {
+  animation: bang 0.2s ease-out;
+  &::after {
+    background: red;
+  }
+}
+
+.miss {
+  &::before {
+    content: '';
+    position: absolute;
+    animation: miss 0.2s ease-out;
+    border: 0.1vmin solid white;
+    border-radius: 50%;
+    width: 2vmin;
+    height: 2vmin;
+  }
+  &::after {
+    background: white;
+  }
+}
+
+@keyframes miss {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
+@keyframes bang {
+  0% {
+    background: red;
+  }
+  100% {
+    background: rgb(204, 204, 204);
+  }
+}
+
+.bf-description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  &__whose,
+  &__connected,
+  &__ready {
+    width: 46vmin;
+    margin: 0 2vmin;
+  }
+  &__whose {
+    font-size: 2rem;
+    margin-top: 2vmin;
+  }
+  &__connected,
+  &__ready {
+    font-size: 1rem;
+    margin-top: 0.4vmin;
+    text-decoration: line-through;
+    color: red;
+    &_active {
+      color: green;
+      text-decoration: none;
+    }
+  }
+}
