@@ -7,7 +7,7 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-const { VUE_APP_PORT: PORT = 3000, NODE_ENV = 'development' } = process.env
+const { PORT = 3000, NODE_ENV = 'development' } = process.env
 
 app.use(cors())
 

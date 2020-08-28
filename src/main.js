@@ -7,7 +7,7 @@ import VueSocketIO from 'vue-socket.io'
 
 Vue.config.productionTip = false
 
-const { VUE_APP_PORT: PORT, NODE_ENV } = process.env
+const { PORT = 3000, NODE_ENV } = process.env
 const connection = NODE_ENV === 'production' ? location.host : `${location.hostname}:${PORT}`
 
 Vue.use(VueCompositionAPI)
