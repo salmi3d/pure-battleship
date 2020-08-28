@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "setup": "yarn install",
-    "start": "yarn build && cross-env NODE_ENV=production node server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
     "server": "nodemon server.js",
     "client": "yarn serve",
     "dev": "cross-env NODE_ENV=development concurrently \"yarn server\" \"yarn client\""
