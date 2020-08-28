@@ -11,13 +11,13 @@ const routes = [
   },
   {
     path: '/single',
-    name: 'SinglePlayer',
+    name: 'singlePlayer',
     component: () => import('@/views/Game.vue'),
     meta: { mode: 'singlePlayer' }
   },
   {
-    path: '/multi',
-    name: 'MultiPlayer',
+    path: '/multi/:roomId?',
+    name: 'multiPlayer',
     component: () => import('@/views/Game.vue'),
     meta: { mode: 'multiPlayer' }
   }

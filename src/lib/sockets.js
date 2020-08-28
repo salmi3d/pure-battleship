@@ -1,4 +1,4 @@
-import { playerNumber, currentPlayer, message, players, socket, userSquares } from './state'
+import { playerNumber, currentPlayer, message, players, socket, userSquares, roomId } from './state'
 import { startGame, enemyGo, userGo } from './game-progress'
 import ships from './ships'
 
@@ -53,13 +53,14 @@ export const assignSocket = s => {
 }
 
 export const connect = () => {
-  if (socket.value.disconnected) {
+  if (socket.value && socket.value.disconnected) {
     socket.value.connect()
   }
+  socket.value.emit('playerJoined', roomId.value)
 }
 
 export const disconnect = () => {
-  if (socket.value.connected) {
+  if (socket.value && socket.value.connected) {
     socket.value.disconnect()
   }
 }
